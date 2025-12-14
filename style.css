@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: #000000da;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#main-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 800px;
+    background-color: aliceblue;
+    padding: 20px 0;
+    box-shadow: #abcde4 40px 20px 50px;
+}
+#display{
+    width: 90%;
+    height: 30%;
+    background-color: bisque;
+}
+#buttons{
+    margin-top: 20px;
+    width: 90%;
+    height: 70%;
+    background-color: beige;
+    box-sizing: border-box;
+    padding: 5px;
+}
+#bttn-container{
+    display: grid;
+    grid-template-areas: 
+    "sci-bttn sci-bttn"
+    "operands operators";
+    grid-template-columns: 3fr 1fr;
+    gap: 5px;
+}
+#sci-bttn{
+    grid-area: sci-bttn;
+    height: 70px;
+    background-color: rebeccapurple;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+#sci-bttn button{
+    background-color: #303136;
+    color: #29A8FF;
+    width: 85px;
+    height: 50px;
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+}
+#operands{
+    grid-area: operands;
+    height: 470px;
+    background-color: blueviolet;
+}
+#operands div{
+    background-color: #303136;
+    color: #29A8FF;
+    width: 50px;
+    height: 50px;
+    border-radius: 20px;
+    padding: 5px;
+    text-align: center;
+}
+#operators{
+    grid-area: operators;
+    background-color: orangered;
+}
