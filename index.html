@@ -1,38 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
     <title>My CalCy</title>
-</head>
-<body>
+  </head>
+  <body>
     <main id="main-container">
+      <div id="container-box">
         <div id="display">
-            <span>Hello here</span>
+          <div id="inputArea">
+            <h3 id="inputs">Enter Values</h3>
+            <h1 id="result"></h1>
+          </div>
         </div>
-        <div id="buttons">
-            <div id="bttn-container">
-                <div id="sci-bttn">
-                    <button>15</button>
-                    <button>20</button>
-                    <button>25</button>
-                    <button>30</button>
-                </div>
-                <div id="operands">
-                    <div>1</div>
-                    <div>2</div>
-                    <div>3</div>
-                    <div>4</div>
-                    <div>5</div>
-                    <div>6</div>
-                    <div>7</div>
-                    <div>8</div>
-                    <div>9</div>
-                </div>
-                <div id="operators">3</div>
+
+        <div id="button-area">
+          <div id="bttn-container">
+            <div id="sci-bttn">
+              <button></button>
+              <button>%</button>
+              <button>C</button>
+              <button id="clr">AC</button>
             </div>
+            <div id="operations">
+              <div id="operands">
+                <button class="nums">1</button>
+                <button class="nums">2</button>
+                <button class="nums">3</button>
+                <button class="nums">4</button>
+                <button class="nums">5</button>
+                <button class="nums">6</button>
+                <button class="nums">7</button>
+                <button class="nums">8</button>
+                <button class="nums">9</button>
+                <button class="nums">0</button>
+                <button class="nums"><b>.</b></button>
+                <button class="equals">=</button>
+              </div>
+              <div id="operators">
+                <button class="opr">-</button>
+                <button class="opr">+</button>
+                <button class="opr">/</button>
+                <!-- <button>%</button>  -->
+                <button class="opr">*</button> 
+              </div>
+            </div> 
+          </div>
         </div>
+      </div>
     </main>
-</body>
+    <script src="./script.js"></script>
+  </body>
 </html>
