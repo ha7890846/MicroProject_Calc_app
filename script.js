@@ -1,68 +1,104 @@
-const numBttn = document.querySelectorAll(".nums");
-const oprBttn = document.querySelectorAll(".opr");
+const nums = document.querySelectorAll(".nums");
+const oprs = document.querySelectorAll(".opr");
 const display = document.getElementById("inputs");
 const resultDisplay = document.getElementById("result");
 const clrBtn = document.getElementById("clr");
-let firstOpr = "";
+const deleteBtn = document.getElementById("delete");
+
+let first = "";
+let second = "";
 let operator = "";
-let secondOpr = "";
-let result = "";
-numBttn.forEach((bttn) => {
-  bttn.addEventListener("click", function () {
-    if (operator === "") {
-      firstOpr += this.textContent;
-      display.textContent = firstOpr;
-    } else {
-      secondOpr += this.textContent;
-      display.textContent = `${
-        firstOpr
-      } ${operator
-    } ${ secondOpr }`;
-    }
-  });
-});
-function calculate(first, second, opr) {
-  let num1 = Number(first);
-  let num2 = Number(second);
-  let cal;
-  switch (operator) {
+
+function calculate(a, b, op) {
+  a = Number(a);
+  b = Number(b);
+
+  switch (op) {
     case "+":
-      cal = num1 + num2;
-      break;
+      return a + b;
     case "-":
-      cal = num1 - num2;
-      break;
+      return a - b;
     case "*":
-      cal = num1 * num2;
-      break;
+      return a * b;
     case "/":
-      cal = num1 / num2;
-      break;
+      return b === 0 ? "Error" : a / b;
+    default:
+      return "";
   }
-  return cal;
 }
-oprBttn.forEach((bttn) => {
-  bttn.addEventListener("click", function () {
-    if (firstOpr !== "" && secondOpr !== "") {
-      let val = calculate(firstOpr, secondOpr, operator);
-      firstOpr = val;
-      result = "" + val;
-      secondOpr = "";
-      operator = this.textContent;
-      if(operator !== "=") {
-        display.textContent = firstOpr + " " + operator;
-      } else {
-        resultDisplay.textContent = "= " + result;
-      }
-    } else if (firstOpr !== "" && secondOpr === "" ) {
-      operator = this.textContent;
-      display.textContent = firstOpr + " " + operator;
-      resultDisplay.textContent = "";
+
+// Numbers
+nums.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    if (!operator) {
+      first += btn.textContent;
+      display.textContent = first;
+    } else {
+      second += btn.textContent;
+      display.textContent = `${first} ${operator} ${second}`;
     }
   });
 });
-clrBtn.addEventListener("click", function () {
-  firstOpr = secondOpr = operator = result = "";
-  display.textContent = "enter Values";
+
+// Operators
+oprs.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const op = btn.textContent;
+
+    if (op === "%" && first) {
+      if (operator && second && !second.includes("%")) {
+        const temp = second + "%";
+        second = "" + (Number(first) * Number(second)) / 100;
+        display.textContent = `${first} ${operator} ${temp}`;
+      } else {
+        first = "" + Number(first) / 100;
+        display.textContent = first;
+      }
+      return;
+    }
+
+    if (op === "=" && first && second) {
+      const result = calculate(first, second, operator);
+      resultDisplay.textContent = "= " + result;
+      first = "" + result;
+      second = "";
+      operator = "";
+      return;
+    }
+
+    if (first && second) {
+      first = "" + calculate(first, second, operator);
+      second = "";
+    }
+
+    operator = op;
+    display.textContent = `${first} ${operator}`;
+    resultDisplay.textContent = "";
+  });
+});
+
+// Clear
+clrBtn.addEventListener("click", () => {
+  first = second = operator = "";
+  display.textContent = "Enter Values";
+  resultDisplay.textContent = "";
+});
+
+// Delete
+deleteBtn.addEventListener("click", () => {
+  if (second) {
+    second = second.slice(0, -1);
+  } else if (operator) {
+    operator = "";
+  } else {
+    first = first.slice(0, -1);
+  }
+
+  display.textContent = second
+    ? `${first} ${operator} ${second}`
+    : operator
+    ? `${first} ${operator}`
+    : first || "Enter Values";
+
   resultDisplay.textContent = "";
 });
